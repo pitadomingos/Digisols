@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
-  Code, Globe, Target, Eye, ChevronRight, Mail, MapPin, Phone, 
+  Code, Globe, Target, Eye, Mail, MapPin, Phone, 
   Menu, X, Server, Shield, Cpu, ArrowRight, CheckCircle2, Zap, 
   Smartphone, ShieldCheck, HardHat, Activity, ExternalLink,
   GraduationCap, Wallet, Monitor
@@ -72,7 +72,7 @@ const PublicHome: React.FC = () => {
     setLanguage(language === 'en' ? 'pt' : 'en');
   };
 
-  const navItems = ['about', 'mission', 'vision', 'partners', 'contact'];
+  const navItems = ['about', 'vision', 'mission', 'partners', 'contact'];
 
   const values = [
     { 
@@ -171,7 +171,7 @@ const PublicHome: React.FC = () => {
       </nav>
 
       {/* --- HERO SECTION --- */}
-      <header className="relative bg-[#020617] h-screen flex items-center justify-center overflow-hidden">
+      <header className="relative bg-[#020617] min-h-screen flex items-center justify-center overflow-hidden">
         {/* Grid Pattern Background */}
         <div className="absolute inset-0 opacity-[0.08]" 
              style={{ 
@@ -184,19 +184,19 @@ const PublicHome: React.FC = () => {
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-600/10 rounded-full blur-[120px] animate-pulse-slow"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-indigo-600/10 rounded-full blur-[120px] animate-pulse-slow delay-1000"></div>
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl mx-auto px-6 relative z-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center py-24">
             {/* Left Content */}
             <div className="text-center lg:text-left">
                 {/* Hero Badge */}
                 <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-6 py-2 text-cyan-400 text-xs font-black uppercase tracking-[0.2em] mb-12 animate-fade-in-down shadow-xl">
-                  <Zap size={14} fill="currentColor" /> INNOVATING TOMORROW
+                  <Zap size={14} fill="currentColor" /> {t.publicHome.hero.badge.toUpperCase()}
                 </div>
 
                 {/* Main Title */}
                 <h1 className="text-6xl md:text-[5.5rem] font-black text-white leading-[1.05] mb-8 tracking-tight animate-fade-in-up">
                   {t.publicHome.hero.title1} <br/>
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">{t.publicHome.hero.title2}</span> <br/>
-                  <span className="text-blue-600">{t.publicHome.hero.title3}</span>
+                  <span className="text-slate-300">{t.publicHome.hero.title3}</span>
                 </h1>
 
                 {/* Description */}
@@ -215,7 +215,7 @@ const PublicHome: React.FC = () => {
                 </div>
             </div>
 
-            {/* Right Side: Live Typing Code Simulation */}
+            {/* Right Side: Live Typing Code Simulation (macOS Style) */}
             <div className="hidden lg:block relative animate-float">
                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-600/50 to-cyan-500/50 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
                 <div className="relative bg-[#0a0f1e]/80 backdrop-blur-2xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden min-h-[380px]">
@@ -243,7 +243,7 @@ const PublicHome: React.FC = () => {
                                 <span>08</span>
                                 <span>09</span>
                             </div>
-                            <pre className="text-blue-400 flex-1 whitespace-pre-wrap">
+                            <pre className="text-blue-400 flex-1 whitespace-pre-wrap min-h-[160px]">
                                 {typedCode}
                                 <span className="w-2 h-4 bg-blue-500 inline-block align-middle ml-1 animate-pulse"></span>
                             </pre>
@@ -264,7 +264,7 @@ const PublicHome: React.FC = () => {
       </header>
 
       {/* --- ABOUT US --- */}
-      <section id="about" className="py-24 bg-white scroll-mt-20">
+      <section id="about" className="min-h-screen py-24 bg-white flex flex-col justify-center scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-4xl font-black text-slate-900 mb-4">{t.publicHome.about.title}</h2>
@@ -295,11 +295,11 @@ const PublicHome: React.FC = () => {
       </section>
 
       {/* --- MISSION SECTION --- */}
-      <section id="mission" className="py-24 bg-slate-50 scroll-mt-20 relative overflow-hidden">
+      <section id="mission" className="min-h-screen py-24 bg-slate-50 flex flex-col justify-center scroll-mt-20 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-20">
              <div className="inline-flex items-center gap-2 bg-blue-500/10 text-blue-600 rounded-full px-4 py-1 text-xs font-black uppercase tracking-widest mb-4">
-                <Target size={14} /> {t.publicMission.hero.badge}
+                <Target size={14} /> {t.publicMission.hero.badge.toUpperCase()}
              </div>
              <h2 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight mb-6">Our Mission</h2>
              <div className="w-20 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
@@ -341,7 +341,7 @@ const PublicHome: React.FC = () => {
       </section>
 
       {/* --- VISION --- */}
-      <section id="vision" className="py-24 bg-[#020617] text-white relative overflow-hidden scroll-mt-20">
+      <section id="vision" className="min-h-screen py-24 bg-[#020617] text-white relative overflow-hidden flex flex-col justify-center scroll-mt-20">
         <div className="absolute inset-0 bg-blue-900/10" style={{ backgroundImage: 'linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.05) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.05) 75%, rgba(255,255,255,0.05) 100%)', backgroundSize: '40px 40px' }}></div>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -377,7 +377,7 @@ const PublicHome: React.FC = () => {
       </section>
 
       {/* --- PARTNERS --- */}
-      <section id="partners" className="py-24 bg-slate-50 scroll-mt-20">
+      <section id="partners" className="min-h-[70vh] py-24 bg-slate-50 flex flex-col justify-center scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-black text-slate-900 mb-4">{t.publicHome.partners.title}</h2>
           <div className="w-20 h-1.5 bg-blue-600 mx-auto rounded-full mb-12"></div>
@@ -409,7 +409,7 @@ const PublicHome: React.FC = () => {
       </section>
 
       {/* --- CONTACT --- */}
-      <section id="contact" className="py-24 bg-white relative scroll-mt-20">
+      <section id="contact" className="min-h-screen py-24 bg-white relative flex flex-col justify-center scroll-mt-20">
         <div className="max-w-5xl mx-auto px-6">
           <div className="bg-[#020617] rounded-[2.5rem] p-8 md:p-16 text-white shadow-2xl relative overflow-hidden border border-slate-800">
              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600 rounded-full blur-[100px] opacity-10"></div>
@@ -432,9 +432,9 @@ const PublicHome: React.FC = () => {
                </div>
                <div className="bg-slate-900 text-white p-8 rounded-3xl shadow-inner border border-slate-800">
                  <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-                   <input type="text" className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none text-white" placeholder={t.publicHome.contact.form.name} />
-                   <input type="email" className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none text-white" placeholder={t.publicHome.contact.form.email} />
-                   <textarea className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm h-32 resize-none font-bold focus:ring-2 focus:ring-blue-500 outline-none text-white" placeholder={t.publicHome.contact.form.details}></textarea>
+                   <input type="text" className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none text-white transition-all" placeholder={t.publicHome.contact.form.name} />
+                   <input type="email" className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none text-white transition-all" placeholder={t.publicHome.contact.form.email} />
+                   <textarea className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm h-32 resize-none font-bold focus:ring-2 focus:ring-blue-500 outline-none text-white transition-all" placeholder={t.publicHome.contact.form.details}></textarea>
                    <button className="w-full bg-blue-600 text-white font-black py-4 rounded-xl hover:bg-blue-700 transition-all shadow-lg active:scale-95 uppercase tracking-wider">{t.publicHome.contact.form.btn}</button>
                  </form>
                </div>

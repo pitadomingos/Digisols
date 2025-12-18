@@ -85,7 +85,7 @@ export const translations = {
         enterHub: 'Enter Client Hub'
       },
       hero: {
-        badge: 'Critical Activity Requisitions',
+        badge: 'Innovating Tomorrow',
         title1: 'Architecting',
         title2: 'Enterprise',
         title3: 'Future',
@@ -149,7 +149,7 @@ export const translations = {
         values: {
             title: 'Operational Pillars',
             precision: {
-                title: 'Lógica de Conformidade',
+                title: 'Compliance Logic',
                 desc: 'Integrating directly with training matrices to automate the validation of critical requisitions.'
             },
             safety: {
@@ -1120,7 +1120,7 @@ export const translations = {
         enterHub: 'Central do Cliente'
       },
       hero: {
-        badge: 'Requisições de Atividades Críticas',
+        badge: 'Inovando o Amanhã',
         title1: 'Arquitetando',
         title2: 'Futuro',
         title3: 'Empresarial',
