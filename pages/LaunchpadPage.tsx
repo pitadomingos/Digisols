@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
@@ -25,66 +24,66 @@ const LaunchpadPage: React.FC<LaunchpadPageProps> = ({ userRole, userName, isPre
     {
       id: 'cars',
       name: 'CARS (SaaS)',
-      desc: t.portfolio.items.cars.category,
+      desc: t.portfolio?.items?.cars?.category || 'Compliance Management',
       icon: ShieldCheck,
       color: 'blue',
       gradient: 'from-blue-600 to-indigo-700',
-      status: t.launchpad.status.active,
+      status: t.launchpad?.status?.active || 'Active',
       path: '/cars-login',
       isAvailable: true
     },
     {
       id: 'edudesk',
       name: 'EduDesk',
-      desc: t.portfolio.items.edudesk.category,
+      desc: t.portfolio?.items?.edudesk?.category || 'Education Management',
       icon: GraduationCap,
       color: 'indigo',
       gradient: 'from-indigo-500 to-blue-500',
-      status: t.launchpad.status.access,
+      status: t.launchpad?.status?.access || 'Request Access',
       path: '/portfolio/edudesk',
       isAvailable: false
     },
     {
       id: 'h365',
       name: 'H365',
-      desc: t.portfolio.items.h365.category,
+      desc: t.portfolio?.items?.h365?.category || 'Healthcare Dashboard',
       icon: Activity,
       color: 'rose',
       gradient: 'from-rose-500 to-pink-500',
-      status: t.launchpad.status.access,
+      status: t.launchpad?.status?.access || 'Request Access',
       path: '/portfolio/h365',
       isAvailable: false
     },
     {
       id: 'microfin',
       name: 'MicroFin',
-      desc: t.portfolio.items.microfin.category,
+      desc: t.portfolio?.items?.microfin?.category || 'Financial Controls',
       icon: Wallet,
       color: 'amber',
       gradient: 'from-amber-500 to-orange-500',
-      status: t.launchpad.status.trial,
+      status: t.launchpad?.status?.trial || 'Beta',
       path: '/portfolio/microfin',
       isAvailable: false
     },
     {
       id: 'jactrac',
       name: 'JacTrac Mini',
-      desc: t.portfolio.items.jactrac.category,
+      desc: t.portfolio?.items?.jactrac?.category || 'Asset Tracking',
       icon: Wrench,
       color: 'orange',
       gradient: 'from-orange-600 to-red-500',
-      status: t.launchpad.status.active,
+      status: t.launchpad?.status?.active || 'Active',
       path: '/portfolio/jactrac',
       isAvailable: false
     },
     {
       id: 'swiftpos',
       name: 'SwiftPOS',
-      desc: t.portfolio.items.swiftpos.category,
+      desc: t.portfolio?.items?.swiftpos?.category || 'Inventory Control',
       icon: CreditCard,
       color: 'emerald',
       gradient: 'from-emerald-500 to-teal-500',
-      status: t.launchpad.status.access,
+      status: t.launchpad?.status?.access || 'Request Access',
       path: '/portfolio/swiftpos',
       isAvailable: false
     }
@@ -140,15 +139,15 @@ const LaunchpadPage: React.FC<LaunchpadPageProps> = ({ userRole, userName, isPre
       <main className="relative z-10 max-w-7xl mx-auto px-6 py-12">
           
           <div className="mb-12">
-              <h1 className="text-4xl md:text-5xl font-black text-white mb-2 tracking-tight">{t.launchpad.title}</h1>
-              <p className="text-slate-400 text-lg">{t.launchpad.welcome.replace('{name}', userName.split(' ')[0])}</p>
+              <h1 className="text-4xl md:text-5xl font-black text-white mb-2 tracking-tight">{t.launchpad?.title || 'Launchpad'}</h1>
+              <p className="text-slate-400 text-lg">{t.launchpad?.welcome?.replace('{name}', userName.split(' ')[0]) || `Welcome, ${userName}`}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {applications.map((app, i) => {
                   const Icon = app.icon;
-                  const isActive = app.status === t.launchpad.status.active;
-                  const isTrial = app.status === t.launchpad.status.trial;
+                  const isActive = app.status === (t.launchpad?.status?.active || 'Active');
+                  const isTrial = app.status === (t.launchpad?.status?.trial || 'Beta');
                   const canLaunch = app.isAvailable;
 
                   return (
@@ -181,8 +180,8 @@ const LaunchpadPage: React.FC<LaunchpadPageProps> = ({ userRole, userName, isPre
                               </div>
 
                               <div className="mt-10 flex items-center justify-between">
-                                  <span className={`text-xs font-bold uppercase tracking-widest ${canLaunch ? (isActive || isTrial ? 'text-blue-500' : 'text-slate-600') : 'text-slate-700'}`}>
-                                      {isActive || isTrial ? t.launchpad.btnLaunch : t.launchpad.btnExplore}
+                                  <span className={`text-xs font-bold uppercase tracking-widest ${canLaunch ? (isActive || isTrial ? (t.launchpad?.btnLaunch || 'Launch') : (t.launchpad?.btnExplore || 'View')) : 'Locked'}`}>
+                                      {isActive || isTrial ? t.launchpad?.btnLaunch || 'Launch' : t.launchpad?.btnExplore || 'View'}
                                   </span>
                                   <div className={`w-10 h-10 rounded-full flex items-center justify-center border transition-all ${canLaunch ? 'bg-blue-600 border-blue-500 text-white' : 'bg-transparent border-slate-800 text-slate-800'}`}>
                                       <ArrowRight size={18} className={canLaunch ? "group-hover:translate-x-1 transition-transform" : ""} />
@@ -201,15 +200,15 @@ const LaunchpadPage: React.FC<LaunchpadPageProps> = ({ userRole, userName, isPre
                       <Star size={32} fill="currentColor" />
                   </div>
                   <div className="text-left">
-                      <h4 className="text-xl font-bold text-white">{t.launchpad.footer.title}</h4>
-                      <p className="text-slate-400 text-sm">{t.launchpad.footer.desc}</p>
+                      <h4 className="text-xl font-bold text-white">{t.launchpad?.footer?.title || 'Unified Support'}</h4>
+                      <p className="text-slate-400 text-sm">{t.launchpad?.footer?.desc || 'Contact DigiSols for custom architecture.'}</p>
                   </div>
               </div>
               <button 
                 onClick={() => navigate('/')}
                 className="bg-white text-slate-900 px-8 py-3 rounded-xl font-bold hover:bg-slate-200 transition-all shadow-xl hover:scale-105 active:scale-95"
               >
-                  {t.launchpad.footer.btn}
+                  {t.launchpad?.footer?.btn || 'Contact Us'}
               </button>
           </div>
       </main>
@@ -218,7 +217,7 @@ const LaunchpadPage: React.FC<LaunchpadPageProps> = ({ userRole, userName, isPre
       <footer className="fixed bottom-6 right-6 z-50">
           <div className="bg-slate-900/80 backdrop-blur-md border border-slate-800 px-4 py-2 rounded-full shadow-2xl flex items-center gap-3">
               <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-              <span className="text-[10px] font-black uppercase text-slate-400 tracking-widest">{t.launchpad.globalStatus}</span>
+              <span className="text-[10px] font-black uppercase text-slate-400 tracking-widest">{t.launchpad?.globalStatus || 'Online'}</span>
           </div>
       </footer>
     </div>

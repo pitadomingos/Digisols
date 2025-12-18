@@ -2,8 +2,8 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
-  ArrowLeft, Code, GraduationCap, Activity, Wallet, Wrench, CreditCard, 
-  ChevronRight, Zap, ShieldCheck, Factory, Anchor, HardHat, Globe
+  ArrowLeft, GraduationCap, Activity, Wallet, Wrench, CreditCard, 
+  ChevronRight, Zap, ShieldCheck, Globe, Monitor, Radio
 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -19,66 +19,116 @@ const PortfolioPage: React.FC = () => {
     setLanguage(language === 'en' ? 'pt' : 'en');
   };
 
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        navigate('/');
+    }
+  };
+
   const products = [
     {
       id: 'cars',
-      name: 'CARS (SaaS)',
+      name: t.portfolio.items.cars.name,
       category: t.portfolio.items.cars.category,
       description: t.portfolio.items.cars.desc,
       icon: ShieldCheck,
       color: 'blue',
       gradient: 'from-blue-600 to-indigo-700',
-      industries: ['Mining', 'Oil & Gas', 'Ports', 'Manufacturing']
+      industries: [
+        t.portfolio.industries.mining,
+        t.portfolio.industries.oilGas,
+        t.portfolio.industries.ports,
+        t.portfolio.industries.manufacturing
+      ],
+      tags: [t.portfolio.tags.iot, t.portfolio.tags.saas, t.portfolio.tags.security, t.portfolio.tags.offline],
+      badgeLabel: t.portfolio.labels.flagship
+    },
+    {
+        id: 'minesite',
+        name: t.portfolio.items.minesite.name,
+        category: t.portfolio.items.minesite.category,
+        description: t.portfolio.items.minesite.desc,
+        icon: Radio,
+        color: 'orange',
+        gradient: 'from-orange-600 to-red-700',
+        industries: [t.portfolio.industries.mining, t.portfolio.industries.industry],
+        tags: [t.portfolio.tags.iot, t.portfolio.tags.telemetry, t.portfolio.tags.security],
+        badgeLabel: t.portfolio.labels.iotSolution
+    },
+    {
+        id: 'amtecheng',
+        name: t.portfolio.items.amtecheng.name,
+        category: t.portfolio.items.amtecheng.category,
+        description: t.portfolio.items.amtecheng.desc,
+        icon: Monitor,
+        color: 'slate',
+        gradient: 'from-slate-700 to-slate-900',
+        industries: [t.portfolio.industries.engineering, t.portfolio.industries.industry],
+        tags: [t.portfolio.tags.smb, t.portfolio.tags.seo, t.portfolio.tags.cloud],
+        badgeLabel: t.portfolio.labels.webSolution
     },
     {
       id: 'edudesk',
-      name: 'EduDesk',
+      name: t.portfolio.items.edudesk.name,
       category: t.portfolio.items.edudesk.category,
       description: t.portfolio.items.edudesk.desc,
       icon: GraduationCap,
       color: 'indigo',
       gradient: 'from-indigo-500 to-blue-500',
-      industries: ['Education', 'Gov']
+      industries: [t.portfolio.industries.education, t.portfolio.industries.gov],
+      tags: [t.portfolio.tags.scalable, t.portfolio.tags.secure, t.portfolio.tags.cloud],
+      badgeLabel: t.portfolio.labels.ready
     },
     {
       id: 'h365',
-      name: 'H365',
+      name: t.portfolio.items.h365.name,
       category: t.portfolio.items.h365.category,
       description: t.portfolio.items.h365.desc,
       icon: Activity,
       color: 'rose',
       gradient: 'from-rose-500 to-pink-500',
-      industries: ['Healthcare', 'Clinical']
+      industries: [t.portfolio.industries.healthcare, t.portfolio.industries.clinical],
+      tags: [t.portfolio.tags.scalable, t.portfolio.tags.secure, t.portfolio.tags.cloud],
+      badgeLabel: t.portfolio.labels.ready
     },
     {
       id: 'microfin',
-      name: 'MicroFin',
+      name: t.portfolio.items.microfin.name,
       category: t.portfolio.items.microfin.category,
       description: t.portfolio.items.microfin.desc,
       icon: Wallet,
       color: 'amber',
       gradient: 'from-amber-500 to-orange-500',
-      industries: ['Finance', 'Banking']
+      industries: [t.portfolio.industries.finance, t.portfolio.industries.banking],
+      tags: [t.portfolio.tags.scalable, t.portfolio.tags.secure, t.portfolio.tags.cloud],
+      badgeLabel: t.portfolio.labels.ready
     },
     {
       id: 'jactrac',
-      name: 'JacTrac Mini',
+      name: t.portfolio.items.jactrac.name,
       category: t.portfolio.items.jactrac.category,
       description: t.portfolio.items.jactrac.desc,
       icon: Wrench,
       color: 'orange',
       gradient: 'from-orange-600 to-red-500',
-      industries: ['Logistics', 'Industry']
+      industries: [t.portfolio.industries.logistics, t.portfolio.industries.industry],
+      tags: [t.portfolio.tags.scalable, t.portfolio.tags.secure, t.portfolio.tags.cloud],
+      badgeLabel: t.portfolio.labels.ready
     },
     {
       id: 'swiftpos',
-      name: 'SwiftPOS',
+      name: t.portfolio.items.swiftpos.name,
       category: t.portfolio.items.swiftpos.category,
       description: t.portfolio.items.swiftpos.desc,
       icon: CreditCard,
       color: 'emerald',
       gradient: 'from-emerald-500 to-teal-500',
-      industries: ['Retail', 'Security']
+      industries: [t.portfolio.industries.retail, t.portfolio.industries.security],
+      tags: [t.portfolio.tags.scalable, t.portfolio.tags.secure, t.portfolio.tags.cloud],
+      badgeLabel: t.portfolio.labels.ready
     }
   ];
 
@@ -157,8 +207,8 @@ const PortfolioPage: React.FC = () => {
               <div className="md:w-2/3 p-8 md:p-12 flex flex-col justify-center">
                  <h4 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
                     {product.name}
-                    <span className={`text-xs px-3 py-1 rounded-full font-bold bg-${product.color}-100 text-${product.color}-700`}>
-                        {product.id === 'cars' ? t.portfolio.labels.flagship : t.portfolio.labels.ready}
+                    <span className={`text-[10px] px-3 py-1 rounded-full font-black uppercase bg-slate-100 text-slate-600 border border-slate-200`}>
+                        {product.badgeLabel}
                     </span>
                  </h4>
                  <p className="text-slate-600 text-lg leading-relaxed mb-8">
@@ -166,8 +216,8 @@ const PortfolioPage: React.FC = () => {
                  </p>
                  
                  <div className="flex flex-wrap gap-4">
-                    {(product.id === 'cars' ? ['IoT Ready', 'SaaS', 'High Security', 'Offline Capability'] : ['Scalable', 'Secure', 'Cloud-Based']).map(tag => (
-                       <span key={tag} className="px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-sm font-bold border border-slate-200">
+                    {product.tags.map(tag => (
+                       <span key={tag} className="px-4 py-2 bg-slate-50 text-slate-500 rounded-lg text-xs font-black uppercase border border-slate-200">
                           {tag}
                        </span>
                     ))}
@@ -181,15 +231,15 @@ const PortfolioPage: React.FC = () => {
       {/* --- FOOTER CTA --- */}
       <section className="bg-slate-900 py-24 text-center">
          <div className="max-w-4xl mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-6">Need a Custom Solution?</h2>
+            <h2 className="text-3xl md:text-4xl font-black text-white mb-6">{t.portfolio.footer.title}</h2>
             <p className="text-slate-400 text-lg mb-8">
-               We build tailored software for unique business challenges. Let's discuss your requirements.
+               {t.portfolio.footer.desc}
             </p>
             <button 
-              onClick={() => navigate('/')}
+              onClick={() => scrollToSection('contact')}
               className="bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-full font-bold text-lg transition-all shadow-lg shadow-blue-500/30"
             >
-               Contact Us
+               {t.portfolio.footer.btn}
             </button>
          </div>
       </section>

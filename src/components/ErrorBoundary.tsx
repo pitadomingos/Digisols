@@ -18,25 +18,26 @@ interface State {
 
 /**
  * Intercepts runtime errors and provides AI-driven self-healing simulation.
- * Fix: Use React.Component explicitly to ensure setState and props are correctly inherited and recognized by TypeScript.
  */
+/* Fix: Explicitly use React.Component to ensure setState and props are correctly inherited and recognized by TypeScript. */
 export class ErrorBoundary extends React.Component<Props, State> {
-  // Fix: Explicit constructor to initialize state and ensure base class properties are mapped.
+
+  public state: State = {
+    hasError: false,
+    error: null,
+    aiDiagnosis: null,
+    repairProgress: 0,
+    repairStep: 'Initializing Diagnostics...',
+    isRepaired: false
+  };
+
   constructor(props: Props) {
     super(props);
-    this.state = {
-      hasError: false,
-      error: null,
-      aiDiagnosis: null,
-      repairProgress: 0,
-      repairStep: 'Initializing Diagnostics...',
-      isRepaired: false
-    };
   }
 
   private simulationInterval: any = null;
 
-  public static getDerivedStateFromError(error: Error): State {
+  public static getDerivedStateFromError(error: Error): Partial<State> {
     return { 
         hasError: true, 
         error, 
@@ -83,10 +84,10 @@ export class ErrorBoundary extends React.Component<Props, State> {
       let stepIndex = 0;
 
       this.simulationInterval = setInterval(() => {
-          // Fix: Ensure setState is correctly called on the class instance
+          /* Fix: setState is correctly inherited from the React.Component base class. */
           this.setState((prevState) => {
               // Stop progressing if we are waiting for AI but hit 90%
-              const canFinish = !!this.state.aiDiagnosis;
+              const canFinish = !!prevState.aiDiagnosis;
               
               if (prevState.repairProgress >= 90 && !canFinish) {
                   return { repairStep: "Finalizing Analysis..." } as any;
@@ -134,7 +135,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
           sessionStorage.clear();
       } catch(e) { /* ignore */ }
 
-      // Fix: Ensure setState is correctly called on the class instance
+      /* Fix: setState is now correctly accessible on type 'ErrorBoundary'. */
       this.setState({ 
           aiDiagnosis: diagnosis,
           repairProgress: 100,
@@ -232,7 +233,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
 
             {/* --- TERMINAL OUTPUT --- */}
             <div className="mt-8 bg-black/80 rounded-lg border border-slate-800 p-4 font-mono text-xs h-32 overflow-hidden flex flex-col justify-end shadow-inner">
-                <div className="text-slate-500 mb-1">C:\CARS_MANAGER\SYS\ROOT&gt; initiate_healing.exe --force</div>
+                <div className="text-slate-500 mb-1">C:\CARS_MANAGER\SYS\ROOT> initiate_healing.exe --force</div>
                 <div className="text-slate-500 mb-1">Catching Exception... OK</div>
                 <div className="text-slate-400 mb-1">Analyzing stack trace...</div>
                 {this.state.aiDiagnosis && (
@@ -263,7 +264,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
       );
     }
 
-    // Fix: Explicitly use this.props to ensure TypeScript recognizes children from Props interface
+    /* Fix: props is correctly recognized via inheritance from the base React.Component class. */
     return this.props.children;
   }
 }

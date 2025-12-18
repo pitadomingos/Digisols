@@ -1,11 +1,11 @@
-
 import React, { useEffect, useMemo } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { 
   ArrowLeft, CheckCircle2, Layout, Zap, Users, BarChart3, 
   Target, Globe, ShieldCheck, Smartphone, GraduationCap, 
   Activity, Wallet, Wrench, CreditCard, ChevronRight, Rocket,
-  Server, Shield, Box, Database, TrendingUp, Search, Lock
+  Server, Shield, Box, Database, TrendingUp, Search, Lock, Monitor,
+  Radio
 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -31,15 +31,15 @@ const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ isAuthenticated }) => {
     
     return {
       cars: {
-        title: 'CARS (SaaS)',
+        title: 'CARS (RACS)',
         subtitle: t.caseStudies.cars.subtitle,
         challenge: t.caseStudies.cars.challenge,
         solution: t.caseStudies.cars.solution,
         features: t.caseStudies.cars.features,
         impact: [
-          { label: t.caseStudies.cars.impact[0].label, value: '98%', desc: t.caseStudies.cars.impact[0].desc },
-          { label: t.caseStudies.cars.impact[1].label, value: '0%', desc: t.caseStudies.cars.impact[1].desc },
-          { label: t.caseStudies.cars.impact[2].label, value: '-60%', desc: t.caseStudies.cars.impact[2].desc }
+          { label: t.caseStudies.cars.impact?.[0]?.label || '', value: '98%', desc: t.caseStudies.cars.impact?.[0]?.desc || '' },
+          { label: t.caseStudies.cars.impact?.[1]?.label || '', value: '0%', desc: t.caseStudies.cars.impact?.[1]?.desc || '' },
+          { label: t.caseStudies.cars.impact?.[2]?.label || '', value: '-60%', desc: t.caseStudies.cars.impact?.[2]?.desc || '' }
         ],
         stack: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'MQTT'],
         color: 'blue',
@@ -48,6 +48,42 @@ const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ isAuthenticated }) => {
         appPath: '/cars-login',
         isAvailable: true
       },
+      minesite: {
+        title: 'Minesite Vision',
+        subtitle: t.caseStudies.minesite.subtitle,
+        challenge: t.caseStudies.minesite.challenge,
+        solution: t.caseStudies.minesite.solution,
+        features: t.caseStudies.minesite.features,
+        impact: [
+          { label: t.caseStudies.minesite.impact?.[0]?.label || '', value: '-35%', desc: t.caseStudies.minesite.impact?.[0]?.desc || '' },
+          { label: t.caseStudies.minesite.impact?.[1]?.label || '', value: '+18%', desc: t.caseStudies.minesite.impact?.[1]?.desc || '' },
+          { label: t.caseStudies.minesite.impact?.[2]?.label || '', value: 'Real-time', desc: t.caseStudies.minesite.impact?.[2]?.desc || '' }
+        ],
+        stack: ['Node.js', 'MQTT', 'InfluxDB', 'Grafana', 'Edge Compute'],
+        color: 'orange',
+        icon: Radio,
+        gradient: 'from-orange-600 to-red-700',
+        appPath: '#',
+        isAvailable: false
+      },
+      amtecheng: {
+        title: 'Amtecheng Eng.',
+        subtitle: t.caseStudies.amtecheng.subtitle,
+        challenge: t.caseStudies.amtecheng.challenge,
+        solution: t.caseStudies.amtecheng.solution,
+        features: t.caseStudies.amtecheng.features,
+        impact: [
+          { label: t.caseStudies.amtecheng.impact?.[0]?.label || '', value: '+350%', desc: t.caseStudies.amtecheng.impact?.[0]?.desc || '' },
+          { label: t.caseStudies.amtecheng.impact?.[1]?.label || '', value: '1.4s', desc: t.caseStudies.amtecheng.impact?.[1]?.desc || '' },
+          { label: t.caseStudies.amtecheng.impact?.[2]?.label || '', value: '9.2/10', desc: t.caseStudies.amtecheng.impact?.[2]?.desc || '' }
+        ],
+        stack: ['Next.js', 'Tailwind', 'Strapi CMS', 'AWS S3', 'Vercel Edge'],
+        color: 'slate',
+        icon: Monitor,
+        gradient: 'from-slate-700 to-slate-900',
+        appPath: '#',
+        isAvailable: false
+      },
       edudesk: {
         title: 'EduDesk',
         subtitle: t.caseStudies.edudesk.subtitle,
@@ -55,14 +91,14 @@ const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ isAuthenticated }) => {
         solution: t.caseStudies.edudesk.solution,
         features: t.caseStudies.edudesk.features,
         impact: [
-          { label: t.caseStudies.edudesk.impact[0].label, value: '+22%', desc: t.caseStudies.edudesk.impact[0].desc },
-          { label: t.caseStudies.edudesk.impact[1].label, value: '85%', desc: t.caseStudies.edudesk.impact[1].desc },
-          { label: t.caseStudies.edudesk.impact[2].label, value: '-35%', desc: t.caseStudies.edudesk.impact[2].desc }
+          { label: t.caseStudies.edudesk.impact?.[0]?.label || '', value: '+22%', desc: t.caseStudies.edudesk.impact?.[0]?.desc || '' },
+          { label: t.caseStudies.edudesk.impact?.[1]?.label || '', value: '85%', desc: t.caseStudies.edudesk.impact?.[1]?.desc || '' },
+          { label: t.caseStudies.edudesk.impact?.[2]?.label || '', value: '-35%', desc: t.caseStudies.edudesk.impact?.[2]?.desc || '' }
         ],
         stack: ['Next.js', 'Tailwind', 'PostgreSQL', 'Twilio API', 'NFC Sync'],
         color: 'indigo',
         icon: GraduationCap,
-        gradient: 'from-indigo-50 to-blue-500',
+        gradient: 'from-indigo-500 to-blue-500',
         appPath: '#',
         isAvailable: false
       },
@@ -73,9 +109,9 @@ const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ isAuthenticated }) => {
         solution: t.caseStudies.h365.solution,
         features: t.caseStudies.h365.features,
         impact: [
-          { label: t.caseStudies.h365.impact[0].label, value: '-42%', desc: t.caseStudies.h365.impact[0].desc },
-          { label: t.caseStudies.h365.impact[1].label, value: '-88%', desc: t.caseStudies.h365.impact[1].desc },
-          { label: t.caseStudies.h365.impact[2].label, value: 'Inst.', desc: t.caseStudies.h365.impact[2].desc }
+          { label: t.caseStudies.h365.impact?.[0]?.label || '', value: '-42%', desc: t.caseStudies.h365.impact?.[0]?.desc || '' },
+          { label: t.caseStudies.h365.impact?.[1]?.label || '', value: '-88%', desc: t.caseStudies.h365.impact?.[1]?.desc || '' },
+          { label: t.caseStudies.h365.impact?.[2]?.label || '', value: 'Inst.', desc: t.caseStudies.h365.impact?.[2]?.desc || '' }
         ],
         stack: ['React', 'Python (AI)', 'Redis Cache', 'MongoDB', 'WebRTC'],
         color: 'rose',
@@ -91,9 +127,9 @@ const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ isAuthenticated }) => {
           solution: t.caseStudies.microfin.solution,
           features: t.caseStudies.microfin.features,
           impact: [
-            { label: t.caseStudies.microfin.impact[0].label, value: '28%', desc: t.caseStudies.microfin.impact[0].desc },
-            { label: t.caseStudies.microfin.impact[1].label, value: '4min', desc: t.caseStudies.microfin.impact[1].desc },
-            { label: t.caseStudies.microfin.impact[2].label, value: '3x', desc: t.caseStudies.microfin.impact[2].desc }
+            { label: t.caseStudies.microfin.impact?.[0]?.label || '', value: '28%', desc: t.caseStudies.microfin.impact?.[0]?.desc || '' },
+            { label: t.caseStudies.microfin.impact?.[1]?.label || '', value: '4min', desc: t.caseStudies.microfin.impact?.[1]?.desc || '' },
+            { label: t.caseStudies.microfin.impact?.[2]?.label || '', value: '3x', desc: t.caseStudies.microfin.impact?.[2]?.desc || '' }
           ],
           stack: ['TypeScript', 'Node.js', 'AWS Lambda', 'DynamoDB', 'OAuth2'],
           color: 'amber',
@@ -109,9 +145,9 @@ const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ isAuthenticated }) => {
           solution: t.caseStudies.jactrac.solution,
           features: t.caseStudies.jactrac.features,
           impact: [
-            { label: t.caseStudies.jactrac.impact[0].label, value: '-31%', desc: t.caseStudies.jactrac.impact[0].desc },
-            { label: t.caseStudies.jactrac.impact[1].label, value: '+20%', desc: t.caseStudies.jactrac.impact[1].desc },
-            { label: t.caseStudies.jactrac.impact[2].label, value: '-15%', desc: t.caseStudies.jactrac.impact[2].desc }
+            { label: t.caseStudies.jactrac.impact?.[0]?.label || '', value: '-31%', desc: t.caseStudies.jactrac.impact?.[0]?.desc || '' },
+            { label: t.caseStudies.jactrac.impact?.[1]?.label || '', value: '+20%', desc: t.caseStudies.jactrac.impact?.[1]?.desc || '' },
+            { label: t.caseStudies.jactrac.impact?.[2]?.label || '', value: '-15%', desc: t.caseStudies.jactrac.impact?.[2]?.desc || '' }
           ],
           stack: ['React Native', 'SQLite', 'IoT Gateway (MQTT)', 'Azure IoT Hub'],
           color: 'orange',
@@ -127,9 +163,9 @@ const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ isAuthenticated }) => {
           solution: t.caseStudies.swiftpos.solution,
           features: t.caseStudies.swiftpos.features,
           impact: [
-            { label: t.caseStudies.swiftpos.impact[0].label, value: '-55%', desc: t.caseStudies.swiftpos.impact[0].desc },
-            { label: t.caseStudies.swiftpos.impact[1].label, value: '99.9%', desc: t.caseStudies.swiftpos.impact[1].desc },
-            { label: t.caseStudies.swiftpos.impact[2].label, value: '-90%', desc: t.caseStudies.swiftpos.impact[2].desc }
+            { label: t.caseStudies.swiftpos.impact?.[0]?.label || '', value: '-55%', desc: t.caseStudies.swiftpos.impact?.[0]?.desc || '' },
+            { label: t.caseStudies.swiftpos.impact?.[1]?.label || '', value: '99.9%', desc: t.caseStudies.swiftpos.impact?.[1]?.desc || '' },
+            { label: t.caseStudies.swiftpos.impact?.[2]?.label || '', value: '-90%', desc: t.caseStudies.swiftpos.impact?.[2]?.desc || '' }
           ],
           stack: ['C# .NET', 'Electron', 'SQL Server', 'Onvif API', 'OpenCV'],
           color: 'emerald',
@@ -141,7 +177,8 @@ const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ isAuthenticated }) => {
     };
   }, [t]);
 
-  const currentStudy = useMemo(() => studiesData[id as keyof typeof studiesData] || studiesData.cars, [id, studiesData]);
+  const currentId = id as keyof typeof studiesData;
+  const currentStudy = studiesData[currentId] || studiesData.cars;
   const ProductIcon = currentStudy.icon;
   const canLaunch = currentStudy.isAvailable;
   const labels = t.caseStudies.labels;
@@ -187,7 +224,7 @@ const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ isAuthenticated }) => {
       <div className="max-w-7xl mx-auto px-6 -mt-32 relative z-20 pb-24">
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            {currentStudy.impact.map((stat, i) => (
+            {currentStudy.impact.filter(s => s.label).map((stat, i) => (
                 <div key={i} className="bg-white dark:bg-slate-900 p-8 rounded-[2rem] shadow-xl border border-slate-100 dark:border-slate-800 flex flex-col items-center text-center group hover:scale-105 transition-transform">
                     <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">{stat.label}</span>
                     <div className={`text-5xl font-black bg-clip-text text-transparent bg-gradient-to-br ${currentStudy.gradient} mb-3`}>{stat.value}</div>

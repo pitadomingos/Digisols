@@ -167,7 +167,6 @@ const Layout: React.FC<LayoutProps> = ({
     { path: '/trainer-input', label: t.nav.trainerInput, icon: PenTool, visible: [UserRole.SYSTEM_ADMIN, UserRole.RAC_TRAINER].includes(userRole) },
     { path: '/users', label: t.nav.users, icon: Users, visible: userRole === UserRole.SYSTEM_ADMIN },
     { path: '/settings', label: t.nav.settings, icon: Settings, visible: [UserRole.SYSTEM_ADMIN, UserRole.ENTERPRISE_ADMIN, UserRole.SITE_ADMIN].includes(userRole) },
-    { path: '/source-control', label: 'Source Control', icon: GitBranch, visible: userRole === UserRole.SYSTEM_ADMIN },
     { path: '/logs', label: t.nav.logs, icon: ScrollText, visible: [UserRole.SYSTEM_ADMIN, UserRole.ENTERPRISE_ADMIN].includes(userRole) },
     { path: '/manuals', label: t.nav.manuals, icon: BookOpen, visible: true },
     { path: '/feedback-admin', label: t.nav.feedbackAdmin, icon: MessageSquare, visible: [UserRole.SYSTEM_ADMIN, UserRole.ENTERPRISE_ADMIN].includes(userRole) },

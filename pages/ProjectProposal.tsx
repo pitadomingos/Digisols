@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { 
@@ -236,7 +235,7 @@ const ProjectProposal: React.FC = () => {
                       <h3 className="text-2xl font-bold text-white">{t.proposal.objectives.solutionTitle}</h3>
                   </div>
                   <ul className="space-y-4">
-                      {t.proposal.objectives.goals.map((goal: string, i: number) => (
+                      {(t.proposal.objectives.goals || []).map((goal: string, i: number) => (
                           <li key={i} className="flex items-start gap-3 text-slate-300 text-lg">
                               <div className="mt-1.5 w-2 h-2 rounded-full bg-emerald-500 shadow-sm"></div>
                               {goal}
@@ -254,7 +253,7 @@ const ProjectProposal: React.FC = () => {
           <div className="flex flex-col items-center gap-8">
               <div className="p-6 bg-slate-800 border border-blue-500 rounded-2xl w-64 text-center shadow-lg shadow-blue-500/20">
                   <User size={32} className="mx-auto mb-2 text-blue-400" />
-                  <div className="font-bold text-white">Pita Domingos</div>
+                  <div className="font-bold text-white">{t.proposal.aboutMe.name}</div>
                   <div className="text-blue-300 text-sm">Lead Architect</div>
               </div>
               <div className="h-8 w-0.5 bg-slate-600"></div>
@@ -347,7 +346,7 @@ const ProjectProposal: React.FC = () => {
                   </div>
                   <h4 className="text-xl text-amber-200 mb-4 font-bold">Software Integration</h4>
                   <p className="text-lg text-slate-300 leading-relaxed">
-                      {t.proposal.futureUpdates.moduleA.split('-')[1]}
+                      {t.proposal.futureUpdates.moduleA.split('-')[1] || 'Real-time ERP Synchronization'}
                   </p>
               </div>
               <div className="bg-slate-800/50 border border-slate-600 p-10 rounded-[3rem] backdrop-blur-sm">
@@ -357,7 +356,7 @@ const ProjectProposal: React.FC = () => {
                   </div>
                   <h4 className="text-xl text-slate-300 mb-4 font-bold">Physical Infrastructure</h4>
                   <p className="text-lg text-slate-400 leading-relaxed">
-                      {t.proposal.futureUpdates.moduleB.split('-')[1]}
+                      {t.proposal.futureUpdates.moduleB.split('-')[1] || 'IoT Hardware Gateway'}
                   </p>
               </div>
           </div>
@@ -508,16 +507,13 @@ const ProjectProposal: React.FC = () => {
 
   const FinancialsSlide = () => {
       const calculateTotals = () => {
-          const items = t.proposal.financials.items;
+          const items = t.proposal.financials.items || [];
           const getVal = (idx: number) => {
               if (!items[idx]) return 0;
-              return parseFloat(items[idx].cost.replace(/[^0-9.]/g, '') || '0');
+              return parseFloat(items[idx].cost?.replace(/[^0-9.]/g, '') || '0');
           };
-          // Items 1 & 2 (index 0 and 1) - Initial payment
           const initial = getVal(0) + getVal(1); 
-          // Item 4 (index 3) - Training & Documentation (Post UAT)
           const postUat = getVal(3);
-          // Items 3 & 5 (index 2 and 4) - Monthly (Cloud & Maintenance)
           const monthly = getVal(2) + getVal(4);
           return { initial, postUat, monthly };
       };
@@ -530,17 +526,10 @@ const ProjectProposal: React.FC = () => {
           
           <div className="bg-slate-900/80 rounded-3xl border border-slate-700 overflow-hidden shadow-2xl backdrop-blur-md">
               <div className="divide-y divide-slate-800">
-                  <div className="grid grid-cols-12 p-4 bg-slate-800/80 text-xs font-bold text-slate-400 uppercase tracking-wider">
-                      <div className="col-span-1 text-center">#</div>
-                      <div className="col-span-6">Item Description</div>
-                      <div className="col-span-3">Type</div>
-                      <div className="col-span-2 text-right">Cost</div>
-                  </div>
-                  {t.proposal.financials.items.map((item: any, i: number) => (
+                  {(t.proposal.financials.items || []).map((item, i) => (
                       <div key={i} className="grid grid-cols-12 p-5 hover:bg-slate-800/50 transition-colors items-center">
                           <div className="col-span-1 text-center font-mono text-slate-500">{i+1}</div>
-                          <div className="col-span-6 text-white font-medium text-base">{item.name}</div>
-                          <div className="col-span-3 text-sm text-slate-400">{item.type}</div>
+                          <div className="col-span-9 text-white font-medium text-base">{item.name}</div>
                           <div className="col-span-2 text-right font-mono text-lg text-slate-300">{item.cost}</div>
                       </div>
                   ))}
@@ -549,17 +538,17 @@ const ProjectProposal: React.FC = () => {
               <div className="bg-gradient-to-r from-slate-950 to-slate-900 p-8 flex flex-col md:flex-row justify-between items-stretch text-white relative overflow-hidden gap-6 border-t border-slate-700">
                   <div className="flex-1 bg-slate-800/50 p-4 rounded-xl border border-slate-700 relative overflow-hidden">
                       <div className="absolute top-0 left-0 w-1 h-full bg-emerald-500"></div>
-                      <div className="text-xs uppercase font-bold text-slate-400 mb-1">Initial Payment</div>
+                      <div className="text-xs uppercase font-bold text-slate-400 mb-1">Initial</div>
                       <div className="text-3xl font-black font-mono tracking-tight text-white">${totals.initial.toLocaleString()}</div>
                   </div>
                   <div className="flex-1 bg-slate-800/50 p-4 rounded-xl border border-slate-700 relative overflow-hidden">
                       <div className="absolute top-0 left-0 w-1 h-full bg-yellow-500"></div>
-                      <div className="text-xs uppercase font-bold text-slate-400 mb-1">Deployment & Handover</div>
+                      <div className="text-xs uppercase font-bold text-slate-400 mb-1">Post UAT</div>
                       <div className="text-3xl font-black font-mono tracking-tight text-white">${totals.postUat.toLocaleString()}</div>
                   </div>
                   <div className="flex-1 bg-slate-800/50 p-4 rounded-xl border border-slate-700 relative overflow-hidden">
                       <div className="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
-                      <div className="text-xs uppercase font-bold text-slate-400 mb-1">Monthly Recurring</div>
+                      <div className="text-xs uppercase font-bold text-slate-400 mb-1">Monthly</div>
                       <div className="text-3xl font-black font-mono tracking-tight text-white">${totals.monthly.toLocaleString()}</div>
                   </div>
               </div>
